@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 
 const ValidateLogin = (req: Request, res: Response, next: NextFunction) => {
-  console.log('ValidateLogin middleware called'); // Log inicial para verificar se o middleware é chamado
+  console.log('ValidateLogin middleware called');
 
   const { email, password } = req.body;
 
-  console.log('Email:', email); // Log do valor do email
-  console.log('Password:', password); // Log do valor da senha
-
+  console.log('Email:', email);
+  console.log('Password:', password);
   if (!email || !password) {
-    console.log('Missing email or password'); // Log se faltarem email ou senha
+    console.log('Missing email or password');
     return res.status(400).json({ message: 'All fields must be filled' });
   }
 
@@ -17,15 +16,15 @@ const ValidateLogin = (req: Request, res: Response, next: NextFunction) => {
   const correctPassword = password.length >= 6;
   const correctEmail = regex.test(email);
 
-  console.log('Correct Email Format:', correctEmail); // Log para verificar o formato do email
-  console.log('Correct Password Length:', correctPassword); // Log para verificar o comprimento da senha
+  console.log('Correct Email Format:', correctEmail);
+  console.log('Correct Password Length:', correctPassword);
 
   if (!correctPassword || !correctEmail) {
-    console.log('Invalid email or password'); // Log se o email ou a senha forem inválidos
+    console.log('Invalid email or password');
     return res.status(401).json({ message: 'Invalid email or password' });
   }
 
-  next(); // Prossegue para o próximo middleware ou controlador
+  next();
 };
 
 export default ValidateLogin;
