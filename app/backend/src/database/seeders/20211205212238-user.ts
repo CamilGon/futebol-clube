@@ -39,3 +39,4 @@ export default {
     await queryInterface.bulkDelete('users', {});
   },
 }
+
